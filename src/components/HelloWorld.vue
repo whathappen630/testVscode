@@ -1,40 +1,104 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <div class="hello" style="display:flex">
+    <!-- <div id="container" style="height:600px;    width: 1000px;
+    text-align: left;"></div> -->
+      <!-- <iframe width="500px" height="500px" src="http://localhost:5601/goto/afbc5610-cdd0-11ec-ba6b-a145a6dd9c5e" frameborder="0"></iframe> -->
+      <!-- <div style="flex:1"> -->
+<!-- <iframe src="http://localhost:5601/app/dashboards#/view/d8e98630-cdcf-11ec-ba6b-a145a6dd9c5e?embed=true&_g=(filters:!(),refreshInterval:(pause:!f,value:900000),time:(from:now-7d,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,syncColors:!f,useMargins:!t),panels:!((embeddableConfig:(enhancements:()),gridData:(h:15,i:c84c38bc-a1c4-4e09-82da-8e6cea9433fe,w:24,x:0,y:0),id:'45e07720-b890-11e8-a6d9-e546fe2bba5f',panelIndex:c84c38bc-a1c4-4e09-82da-8e6cea9433fe,type:visualization,version:'7.17.0')),query:(language:kuery,query:''),tags:!(),timeRestore:!f,title:'123321',viewMode:view)&show-top-menu=true&show-query-input=true&show-time-filter=true" height="600" width="600"></iframe>      </div> -->
+<!-- <div style="flex:1">
+  <span>当前</span> -->
+  <!-- <iframe src="http://localhost:5601/app/dashboards#/view/d8e98630-cdcf-11ec-ba6b-a145a6dd9c5e?embed=true&_g=(filters:!(),refreshInterval:(pause:!f,value:900000),time:(from:now-7d,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,syncColors:!f,useMargins:!t),panels:!((embeddableConfig:(enhancements:()),gridData:(h:15,i:c84c38bc-a1c4-4e09-82da-8e6cea9433fe,w:24,x:0,y:0),id:'45e07720-b890-11e8-a6d9-e546fe2bba5f',panelIndex:c84c38bc-a1c4-4e09-82da-8e6cea9433fe,type:visualization,version:'7.17.0')),query:(language:kuery,query:''),tags:!(),timeRestore:!f,title:'123321',viewMode:view)&hide-filter-bar=true" height="600" width="600"></iframe>   -->
+
+ <!-- </div> 
+<div style="flex:1">
+  <span>保存最新版本</span> --> 
+  <!-- <iframe src="http://localhost:5601/app/dashboards#/view/d8e98630-cdcf-11ec-ba6b-a145a6dd9c5e?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!f%2Cvalue%3A900000)%2Ctime%3A(from%3Anow-7d%2Cto%3Anow))&hide-filter-bar=true" height="600" width="600"></iframe> -->
+
+<!-- </div> -->
+ <el-table
+      :data="tableData"
+     width="1000">
+      <el-table-column
+        prop="line"
+        label="行"
+        width="20">
+      </el-table-column>
+      <el-table-column
+        prop="caption"
+        label="描述"
+        width="150">
+      </el-table-column>
+      <el-table-column
+        prop="language"
+        label="语言"
+        width="150">
+      </el-table-column>
+       <el-table-column
+        prop="rule_name"
+        label="规则集"
+        width="150">
+      </el-table-column>
+       <el-table-column
+        prop="found_tool"
+        label="工具"
+        width="150">
+      </el-table-column>
+       <el-table-column
+        prop="caption_original"
+        label="描述"
+        width="150">
+      </el-table-column>
+    </el-table>
+</div>
 </template>
 
 <script>
+/*eslint-disable */
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+// import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution.js';
+
+const info = require('./data.json') 
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return{
+      info:``,
+      editor:{},
+      tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }]
+    }
+  },
+   created() {
+     this.info = info.data
+    this.span = this.$apm.startSpan('create-mount-duration', 'custom')
+  },
+  mounted() {
+    this.span && this.span.end()
+    this.tableData = info.data.infos
+    // this.editor = monaco.editor.create(document.getElementById('container'), {
+	  //     value: "function hello() {\n\talert('Hello world!');\n}",
+	  //   language: 'javascript',
+    //   readOnly:true
+    // });
+
   }
 }
 </script>
