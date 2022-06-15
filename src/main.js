@@ -10,6 +10,7 @@ Vue.use(ElementUI);
 
 
 
+
 const routes = []
 const router = new VueRouter({
       // 配置URL和组价直接的映射关系
