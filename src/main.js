@@ -15,10 +15,11 @@ const routes = []
 const router = new VueRouter({
       // 配置URL和组价直接的映射关系
       routes,
-      // history模式 
-      mode: 'history'
+  // history模式 
+  mode: 'history'
   })
   // 将router对象传入到vue实例中
+  // 11222
 
 Vue.use(ApmVuePlugin, {
   router,
